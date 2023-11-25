@@ -1,0 +1,84 @@
+ /* CSS Document */
+
+html, body {
+	
+	background-image: url(../img/background.jpg);
+	margin: 0 auto;
+	font-family: sans-serif;
+	font-size: 18px;
+	color: #333;
+	background-color: #000000;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: bottom center;
+	cursor: url(../img/gatling gun.png);
+	}
+	
+h1{
+	font-family: 'Staatliches', cursive;
+	font-size: 50px;
+	margin: 2px;
+	color: #008080;
+	text-shadow: 1px 1px #000;
+	}
+	
+	p{
+		color:#00008B;
+	}
+	
+button {
+	font-size: 12px;
+	font-weight: bold;
+	padding: 8px; }
+	
+div#content {
+    width: 700px;
+    margin:0 auto;
+	padding: 20px;
+	background-color: #EEE ; }
+	
+div#controls {
+	text-align: right;
+	font-color:#00008B;
+	
+      	}
+	
+div#controls span {
+	font-weight: bold;
+	color: #990000; }
+	
+div#controls button {
+	margin-left: 20px; }
+	
+
+	
+div#gamespace {
+	background-image: url(../img/gamespace.jpg);
+	margin: 20px;
+	padding: 10px;
+	height: 350px;
+	border: 2px solid #CCC; 
+	background-color: #006400;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: bottom center;
+	cursor: url('../img/gun.png'),default;
+	position: relative;
+	}
+	div#timer{
+		display:none;
+		color:#008080;
+		font-weight:bold;
+		
+	}
+.gameimage{
+	width: 100px; 
+}
+div#gamespace img { 
+position: absolute; 
+}
+.content{
+    display: none;
+	color: purple;
+	font-weight: bold;
+}

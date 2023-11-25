@@ -1,0 +1,219 @@
+<!-- 
+		Name: <Put name here>
+		Date: <Put date here>
+		Class: CSCI2447, Javascript Fundamentals
+		Project X
+ -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+  <link rel="icon" type="image/png" href="img/icon.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+<script src="js/jquery-3.6.0.js.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+ <script> 
+ let firstname;
+ var score = 0;
+ var timer = 30;
+ var randX;
+
+ var randY;
+ var clock;
+ var I;
+ var r;
+ var RepeatImg;
+ 
+//This is the ready function that contains code that is ready to execute as soon as the webpage has loaded
+$(document).ready(function(){
+
+//this fuction  allows you to click on images after the game has started and has a function that increments your score when you click on these images
+$("#gamespace").on("click","img", function(){
+//this piece of code allows the image to dissappear after it has been clicked
+$(this).toggle("fold");
+//function to increment score
+increment();
+
+
+//this disables the start button function after it has been clicked.
+$('#start_button').attr('disabled','disabled');
+
+});
+
+
+// this sets the style for the start button code
+$("#start_button").css( {"height":"60px", "width":"150px", "background-color":"#008080", "font-size":"18px","color":"white", "margin-right":"22px"} );
+
+
+//asks users input
+firstname = prompt("What is your first name");
+
+//executes the functions for the game when it is clicked
+document.getElementById("start_button").addEventListener("click", function() {
+("#timer" + "#gamespace").click(beginGame()+ addimage());
+});
+
+//displays user input on the html page and the timer
+document.getElementById("nameprompt").innerText = "Are you ready to get started " + firstname + "?";
+
+  $('#timer' ).show();
+}
+)
+
+
+//coordinates needed for randomzing the pop-in of the images
+function randomX(){
+    var x = Math.floor(Math.random()*561);
+    return x;
+}
+function randomY(){
+    var y = Math.ceil(Math.random()*210);
+    return y;
+
+}
+
+//function used to increment the user score
+function increment(){
+score+=1;
+$("#score").text(score + " points");
+    };
+	
+//adds images at random interval	
+function randoimage(){
+return Math.floor((Math.random()*2000)+0);
+
+};
+//adds images at random interval
+//function DeleteImage(){
+//return Math.floor((Math.random() * 100)+2000);
+
+//};
+
+
+//main game function	
+function beginGame(){
+
+
+   //stores id into a variable
+   var elem = document.getElementById('timer');
+    
+	// the variable contains code which lets the timer to count down 1 second at a time
+    var timerId = setInterval(countdown, 1000);
+    
+	//the function execute code after the time has run out
+    function countdown() {
+	clearTimeout(clock);
+      if (timer < 0) {
+	 
+	  alert("Game is over,you have scored " +score+ " points!" );
+	  //turns off the clickablity of images
+	  
+	  $("#gamespace").off("click","img");
+	  //both of the ClearTimeout help to stop counting below zero(on the webpage and background)
+	  clearTimeout(I);
+      clearTimeout(timerId);
+	  
+
+	  //resets game after it has ended
+	  location.reload();
+      } else {
+        $("#timer").text(timer + ' seconds left');
+        timer-=1;
+		clock = setTimeout("countdown()",1000)
+      }
+    }
+};	
+
+
+// this function helps to hide the content of the tabs unless it has been clicked
+$(function() {
+         $("li").click(function(e) {
+           var val = $(this).children('a').data('val');
+           e.preventDefault();
+           $("li").removeClass("selected");
+           $(this).addClass("selected");
+             $('.content').hide();
+             $('.content' + val).show();
+         });
+     });
+
+//add images to the gamespace
+function addimage(){ 
+random = randoimage();
+//spawns images using the random coordinates
+$('#gamespace').prepend("<img class='gameimage' src= 'img/zombie.png' style=' left:"+randX+"px; top:"+randY+"px; ' />");
+ randX = randomX();
+ randY = randomY();
+ //removes the images whether they have been clicked or not
+ $('img').delay(Math.random()*2000).fadeOut();
+ //adds images to the gamespace in a random manner
+ RepeatImg = setTimeout('addimage()',random);
+ //removes images if the tomer reaches zero
+ if(timer <=0){
+ $('img').remove();
+ 
+ };
+ 
+ 
+
+};
+
+
+
+    </script>
+
+    <title>Kill The Zombies!</title>
+	
+    
+    <!-- CSS styles: This is for me to worry about; not you. -->
+	<link href="css/game.css" rel="stylesheet" />
+    
+  </head>
+  <body>
+  
+	<div id="content"></p>
+	
+	     
+    
+		<h1>Kill The Zombies!</h1> 
+	<ul class="tabrow">
+     <li><a href="#" data-val='1'>About</a></li>
+     <li><a href="#" data-val='2'>Back story</a></li>
+     <li class="selected"><a href="#" data-val='3'>Contact</a></li>
+ </ul>
+<div class="content1 content">
+<b>This is a point-and-click game that has been created using JavaScript, JQuery and HTML.
+</div>
+<div class="content2 content">
+You are an undertaker working at the cemetery and you suddenly notice noises coming from the graves. As soon as you get close to investigate, the dead rip through the ground and start rising up, you run back and grab your gun and take out as many as you can before they enter the near-by village.
+</div>
+<div class="content3 content">
+If you like to give me feedback, You can send me an email <a href = "mailto: benttox@hotmail.com">here</a>!.
+</div>
+		
+		<p id="nameprompt" ></p>
+		<p>After clicking "start", you will have 30 seconds to kill
+		as many zombies as you can. The zombies will appear out of nowhere so keep your guard up! and good luck!</p>
+		
+		<div id="controls">
+			<span id="score">0 points</span>
+			<button type="button" id="start_button">Start!</button>
+		</div>
+		
+		<div id="timer" class="clock">
+		30 seconds left 
+        </div>
+		
+		<div id="gamespace">
+
+			<!--<img class="gameimage" src="img/zombie.png" />-->
+			
+		</div>
+		
+	</div>
+  
+  </body>
+</html>
